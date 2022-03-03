@@ -16,8 +16,12 @@ public class jpaMain {
         tx.begin();
 
         try{
-            Member member = new Member();
-            em.persist(member);
+            Member member1 = Member.createMember("jaejun1",10, RoleType.ADMIN);
+            Member member2 = Member.createMember("jaejun2",12, RoleType.ADMIN);
+
+            em.persist(member1);
+            em.persist(member2);
+
             tx.commit();
         } catch (Exception e){
             tx.rollback();
