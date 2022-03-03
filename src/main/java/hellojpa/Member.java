@@ -5,19 +5,31 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity
+//@Entity
 @SequenceGenerator(
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ", // 매핑할 데이터베이스 시퀀스 이름
         initialValue = 1,
-        allocationSize = 1)
+        allocationSize = 2)
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "MEMBER_SEQ_GENERATOR")
+    /**
+     * IDENTITY 전략은 쿼리가 인서트 시점에 PK가 DB에 인서트가 되므로 영속성 컨테이너에 PK값을 알 수가 없다. 그래서
+     * commit 시점이 아닌 persist 를 호출한 시점에 인서트를 날려버린다.
+     * 그래서 모와서 인서트하는 전략을 IDENTITY 애서는 사용할 수 없다.
+     */
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    /**
+     * sequence 테이블에서 next value 를 통해 값을 가져온다
+     * 그러면 네트워크를 계속 타기때문에 성능상 문제가 생길 수 있다
+     * 그걸 해결하기 위해 allocationSize 를 통해 한번에 시퀀스를 땡겨올 수 있다.
+     */
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
 //    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
