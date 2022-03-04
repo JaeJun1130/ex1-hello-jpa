@@ -16,15 +16,19 @@ public class jpaMain {
         tx.begin();
 
         try{
-            Member member1 = Member.createMember("jaejun1",10, RoleType.ADMIN);
-            Member member2 = Member.createMember("jaejun2",12, RoleType.ADMIN);
-            Member member3 = Member.createMember("jaejun3",12, RoleType.ADMIN);
-            Member member4 = Member.createMember("jaejun4",12, RoleType.ADMIN);
+            NewMember member = new NewMember();
+            Team team = new Team();
+            team.setTeamName("team1");
 
-            em.persist(member1);
-            em.persist(member2);
-            em.persist(member3);
-            em.persist(member4);
+            member.setName("aa");
+            member.setTeam(team);
+
+//            team.getMember().add(member);
+
+            em.persist(team);
+
+            Team team1 = em.find(Team.class, team.getId());
+            em.remove(team1);
 
             tx.commit();
         } catch (Exception e){
