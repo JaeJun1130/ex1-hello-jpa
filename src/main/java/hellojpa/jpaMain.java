@@ -23,8 +23,6 @@ public class jpaMain {
             member.setName("aa");
             member.setTeam(team);
 
-//            team.getMember().add(member);
-
             em.persist(team);
 
             Team team1 = em.find(Team.class, team.getId());

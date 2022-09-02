@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ex1-hello-jpa" />
         <module name="helloJpa" />
+        <module name="ex-hello-jpa" />
       </profile>
     </annotationProcessing>
   </component>
